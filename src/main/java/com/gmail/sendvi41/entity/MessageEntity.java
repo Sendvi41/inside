@@ -1,6 +1,9 @@
 package com.gmail.sendvi41.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
@@ -13,8 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Data
-@Accessors(chain = true)
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "messages")
 public class MessageEntity {
     @Id

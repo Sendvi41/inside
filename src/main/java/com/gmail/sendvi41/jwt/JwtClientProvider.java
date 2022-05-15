@@ -33,8 +33,7 @@ public class JwtClientProvider extends JwtBaseProvider {
                 .compact();
     }
 
-
-    public String getLoginFromToken(String token) {
+    public String getUserNameFromToken(String token) {
         Optional<Jws<Claims>> optionalJws = parseToken(token);
         return optionalJws.map(jws -> jws.getBody().getSubject()).orElse("");
     }

@@ -1,41 +1,53 @@
 package com.gmail.sendvi41.jwt;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import io.jsonwebtoken.JwtException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-import org.springframework.web.filter.GenericFilterBean;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
+import static com.gmail.sendvi41.constants.ApiConstants.CONTROLLER_TOKEN_PATH;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.util.StringUtils.hasText;
 
 @Component
-public class JwtFilter extends GenericFilterBean {
+@RequiredArgsConstructor
+public class JwtFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private JwtClientProvider jwtProvider;
+    private final JwtClientProvider jwtProvider;
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String tokenFromRequest = getTokenFromRequest((HttpServletRequest) request);
-        if (tokenFromRequest != null && jwtProvider.validateToken(tokenFromRequest)) {
-            String userName = jwtProvider.getLoginFromToken(tokenFromRequest);
+    public void doFilterInternal(HttpServletRequest request,
+                                 HttpServletResponse response,
+                                 FilterChain chain) throws IOException, ServletException {
+        String tokenFromRequest = getTokenFromRequest(request);
+        if (CONTROLLER_TOKEN_PATH.equals(request.getRequestURI())) {
+            chain.doFilter(request, response);
+        } else if (tokenFromRequest != null && jwtProvider.validateToken(tokenFromRequest)) {
+            String userName = jwtProvider.getUserNameFromToken(tokenFromRequest);
             UsernamePasswordAuthenticationToken authToken =
                     new UsernamePasswordAuthenticationToken(
-                            userName,
+                            User.withUsername(userName)
+                                    .password("")
+                                    .authorities("USER")
+                                    .build(),
                             null,
-                            new ArrayList<>());
+                            List.of(new SimpleGrantedAuthority("USER")));
             SecurityContextHolder.getContext().setAuthentication(authToken);
+            chain.doFilter(request, response);
+        } else {
+            throw new JwtException("JWT Token is invalid");
         }
-        chain.doFilter(request, response);
     }
 
     private String getTokenFromRequest(HttpServletRequest request) {
