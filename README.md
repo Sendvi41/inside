@@ -121,7 +121,7 @@ Code| Description
 
 > POST http://`host`:`port`/messages
 
-Getting a certain number of messages for a user
+Getting a certain number of last messages for a user
 
 Pattern of Item `amount`:  `history `number
 
