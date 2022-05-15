@@ -12,6 +12,7 @@ create table messages
 (
     message_id serial primary key,
     message varchar(100) not null,
+    creation_date TIMESTAMP not null,
     user_id INTEGER,
     FOREIGN KEY (user_id) REFERENCES users (user_id)
 );

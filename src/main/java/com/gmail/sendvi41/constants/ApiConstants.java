@@ -7,4 +7,5 @@ import lombok.NoArgsConstructor;
 public class ApiConstants {
     public static final String CONTROLLER_TOKEN_PATH = "/token";
     public static final String CONTROLLER_USER_PATH = "/user";
+    public static final String CONTROLLER_MESSAGE_PATH = "/message";
 }

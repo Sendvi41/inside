@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
@@ -39,6 +40,7 @@ public class UserServiceImpl implements UserService {
             return messageRepository.save(MessageEntity.builder()
                     .message(message)
                     .user(user.get())
+                    .creationDate(LocalDateTime.now())
                     .build());
         } else {
             throw new UserServiceException("User is not found", NOT_FOUND);
