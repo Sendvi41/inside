@@ -58,7 +58,7 @@ Petr1234| 0000
 
 ### API
 
-POST http://{URL}/token
+> POST http://{URL}/token
 
 This endpoint is needed to get the JWT token
 
@@ -86,7 +86,7 @@ Code| Description
 200 Ok | The token has been received
 400 Bad Request| User name or password entered incorrectly
 
-POST http://{URL}/user/message
+> POST http://{URL}/user/message
 
 Adding a message to a user
 
@@ -119,7 +119,7 @@ Code| Description
 401 Unauthorized| JWT Token is invalid
 404 Not found| User is not found
 
-POST http://{URL}/messages
+> POST http://{URL}/messages
 
 Getting a certain number of messages for a user
 
