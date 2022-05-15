@@ -17,10 +17,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.gmail.sendvi41.constants.ApiConstants.CONTROLLER_MESSAGE_PATH;
+import static com.gmail.sendvi41.utils.TestUtils.getListMessageEntity;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -66,13 +66,5 @@ class MessageControllerTest {
         return new GetMessageRequest()
                 .setName("IVANCOOL")
                 .setAmount("history 10");
-    }
-
-    private List<MessageEntity> getListMessageEntity() {
-        return List.of(MessageEntity.builder()
-                .id(1)
-                .message("Hello")
-                .creationDate(LocalDateTime.now())
-                .build());
     }
 }
