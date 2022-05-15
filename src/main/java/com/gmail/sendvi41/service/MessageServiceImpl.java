@@ -2,7 +2,9 @@ package com.gmail.sendvi41.service;
 
 import com.gmail.sendvi41.entity.MessageEntity;
 import com.gmail.sendvi41.exception.IncorrectPatternForMessage;
+import com.gmail.sendvi41.exception.NotFoundException;
 import com.gmail.sendvi41.repository.MessageRepository;
+import com.gmail.sendvi41.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +17,15 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @RequiredArgsConstructor
 public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
+    private final UserRepository userRepository;
     private final static String INCORRECT_MESSAGE = "Pattern of message isn't correct. Correct format 'history 10'";
 
     @Override
     public List<MessageEntity> getMessagesByName(String name, String amount) {
         Integer number = parseAmount(amount);
+        userRepository.findByName(name).orElseThrow(() ->
+                new NotFoundException("User doesn't exist with name " + name)
+        );
         return messageRepository.findByNameWithLimit(name, number);
     }
 
