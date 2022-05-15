@@ -4,7 +4,7 @@ import com.gmail.sendvi41.dto.GetMessageRequest;
 import com.gmail.sendvi41.entity.MessageEntity;
 import com.gmail.sendvi41.service.MessageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +21,7 @@ public class MessageController {
 
     private final MessageService messageService;
 
-    @GetMapping(produces = APPLICATION_JSON_VALUE)
+    @PostMapping(produces = APPLICATION_JSON_VALUE)
     public List<MessageEntity> getMessages(@RequestBody GetMessageRequest request) {
         return messageService.getMessagesByName(request.getName(), request.getAmount());
     }

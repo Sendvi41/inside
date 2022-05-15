@@ -1,0 +1,22 @@
+curl --location --request POST 'http://localhost:8080/token' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "IVANCOOL",
+    "password": "0000"
+}'
+
+curl --location --request POST 'http://localhost:8080/user/message' \
+--header 'Authorization: Bearer_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJVkFOQ09PTCIsImlkIjoxLCJleHAiOjE2NTI1OTAwNDN9.Jjlxc_ehi2pCdiGXpR4oiPYA_z2ICO8N7mxbA57eEv35CJXtsbrogy5ZMhGWaRErJMELi8pNOtHjgywS6hXRhQ' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "IVANCOOL",
+    "message": "Hello guys 9"
+}'
+
+curl --location --request POST 'http://localhost:8080/message' \
+--header 'Authorization: Bearer_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJJVkFOQ09PTCIsImlkIjoxLCJleHAiOjE2NTI1OTAwNDN9.Jjlxc_ehi2pCdiGXpR4oiPYA_z2ICO8N7mxbA57eEv35CJXtsbrogy5ZMhGWaRErJMELi8pNOtHjgywS6hXRhQ' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "IVANCOOL",
+    "amount": "history 10"
+}'

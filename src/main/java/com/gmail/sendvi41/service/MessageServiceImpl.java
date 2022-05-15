@@ -15,7 +15,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @RequiredArgsConstructor
 public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
-    private final static String INCORRECT_MESSAGE = "Pattern of message isn't correct Correct format 'history 10'";
+    private final static String INCORRECT_MESSAGE = "Pattern of message isn't correct. Correct format 'history 10'";
 
     @Override
     public List<MessageEntity> getMessagesByName(String name, String amount) {
