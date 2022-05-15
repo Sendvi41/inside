@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 
 import static com.gmail.sendvi41.constants.ApiConstants.CONTROLLER_USER_PATH;
 import static com.gmail.sendvi41.enums.Status.SUCCESS;
+import static com.gmail.sendvi41.utils.TestUtils.getMessageEntity;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -67,13 +68,5 @@ class UserControllerTest {
         return new AddMessageRequest()
                 .setName("IVANCOOL")
                 .setMessage("Hello");
-    }
-
-    private MessageEntity getMessageEntity() {
-        return MessageEntity.builder()
-                .id(1)
-                .message("Hello")
-                .creationDate(LocalDateTime.now())
-                .build();
     }
 }

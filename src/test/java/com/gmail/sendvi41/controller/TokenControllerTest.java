@@ -20,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.gmail.sendvi41.constants.ApiConstants.CONTROLLER_TOKEN_PATH;
+import static com.gmail.sendvi41.utils.TestUtils.buildUserEntity;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -72,11 +73,5 @@ class TokenControllerTest {
         return new CreateTokenRequest()
                 .setName("IVANCOOL")
                 .setPassword("0000");
-    }
-
-    private UserEntity buildUserEntity() {
-        return new UserEntity()
-                .setId(1)
-                .setName("IVANCOOL");
     }
 }
