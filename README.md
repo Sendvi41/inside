@@ -119,7 +119,7 @@ Code| Description
 401 Unauthorized| JWT Token is invalid
 404 Not found| User is not found
 
-POST http://{URL}/message
+POST http://{URL}/messages
 
 Getting a certain number of messages for a user
 
